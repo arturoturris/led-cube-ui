@@ -4,25 +4,125 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Proyecto Final IOT</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> 
 </head>
 <body>
-    <button type="button" id="pattern1" class="btn btn-1 btn-1a">
-        <canvas width="130" height="130" id="canvasPattern1"></canvas>
-    </button>
-    <button type="button" id="pattern2" class="btn btn-1 btn-1a">
-        <canvas width="130" height="130" id="canvasPattern2"></canvas>
-    </button>
-    <button type="button" id="pattern3" class="btn btn-1 btn-1a">
-        <canvas width="130" height="130" id="canvasPattern3"></canvas>
-    </button>
-    <button type="button" id="pattern4" class="btn btn-1 btn-1a">
-        <canvas width="130" height="130" id="canvasPattern4"></canvas>
-    </button>
-    <button type="button" id="pattern5" class="btn btn-1 btn-1a">
-        <canvas width="130" height="130" id="canvasPattern5"></canvas>
-    </button>
+    <div style="display: flex; flex-direction: column;justify-content: center; align-content: center; align-items: center;">
+        <h1>Elige Un Patrón</h1>
+
+        <div style="display: flex; justify-content: center; align-content: center; align-items: center; flex-direction: row; flex-wrap: wrap;">
+            <div style="display: flex; flex-direction: column; justify-content: center; align-content: center; align-items: center;">
+                <h3>Apagado</h3>
+                <button type="button" id="pattern1" class="btn btn-1 btn-1a" onclick="command(1)">
+                    <canvas width="130" height="130" id="canvasPattern1"></canvas>
+                </button>
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: center; align-content: center; align-items: center;">
+                <h3>Encendido</h3>
+                <button type="button" id="pattern2" class="btn btn-1 btn-1a" onclick="command(2)">
+                    <canvas width="130" height="130" id="canvasPattern2"></canvas>
+                </button>
+            </div>
+
+            <div style="display: flex; flex-direction: column; justify-content: center; align-content: center; align-items: center;">
+                <h3>Bordes</h3>
+                <button type="button" id="pattern3" class="btn btn-1 btn-1a" onclick="command(3)">
+                    <canvas width="130" height="130" id="canvasPattern3"></canvas>
+                </button>
+            </div>
+
+            <div style="display: flex; flex-direction: column; justify-content: center; align-content: center; align-items: center;">
+                <h3>Uno a uno</h3>
+                <button type="button" id="pattern4" class="btn btn-1 btn-1a" onclick="command(4)">
+                    <canvas width="130" height="130" id="canvasPattern4"></canvas>
+                </button>
+            </div>
+
+            <div style="display: flex; flex-direction: column; justify-content: center; align-content: center; align-items: center;">
+                <h3>Adelante y atras</h3>
+                <button type="button" id="pattern5" class="btn btn-1 btn-1a" onclick="command(5)">
+                    <canvas width="130" height="130" id="canvasPattern5"></canvas>
+                </button>
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: center; align-content: center; align-items: center;">
+                <h3>Zigzag</h3>
+                <button type="button" id="pattern6" class="btn btn-1 btn-1a" onclick="command(6)">
+                    <canvas width="130" height="130" id="canvasPattern6"></canvas>
+                </button>
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: center; align-content: center; align-items: center;">
+                <h3>Hacia arriba</h3>
+                <button type="button" id="pattern7" class="btn btn-1 btn-1a" onclick="command(7)">
+                    <canvas width="130" height="130" id="canvasPattern7"></canvas>
+                </button>
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: center; align-content: center; align-items: center;">
+                <h3>Iniciales</h3>
+                <button type="button" id="pattern8" class="btn btn-1 btn-1a" onclick="command(8)">
+                    <canvas width="130" height="130" id="canvasPattern8"></canvas>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="names">
+        <p>Cruz Zamora María Fernanda</p>
+        <p>Gonzalez Avendaño Roberto Carlos</p>
+        <p>Tenorio López Luis Arturo</p>
+    </div>
+
     <script src="animation.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        var clientId = 'client_id_'+ Math.floor((Math.random() * 1000000) + 1);
+        client = new Paho.MQTT.Client("driver.cloudmqtt.com", 38658, clientId);
+
+        client.onConnectionLost = onConnectionLost;
+        client.onMessageArrived = onMessageArrived;
+
+        var options = {
+            useSSL: true,
+            userName: "hlgsjgtn",
+            password: "k1R00h5NWOA6",
+            onSuccess:onConnect,
+            onFailure:doFail
+        }
+
+        client.connect(options);
+
+        function onConnect() {
+            console.log("Conexión exitosa!!!");
+            client.subscribe("entradaMFCZ");
+        }
+
+        function onMessageArrived(message){
+            console.log("Un mensaje ha llegado: "+ message.payloadString);
+        }
+
+        function doFail(e){
+            console.log(e);
+        }
+
+        function onConnectionLost(responseObject){
+            if(responseObject.errorCode !== 0)
+            {
+                console.log("onConnectionLost: "+responseObject.errorMessage);
+            }
+        }
+
+        function command(value)
+        {
+            console.log(value);
+            message = new Paho.MQTT.Message(value + "");
+            message.destinationName = "entradaMFCZ";
+            client.send(message)
+        }
+
+    </script>
 </body>
 </html>

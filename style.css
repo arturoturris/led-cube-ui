@@ -1,4 +1,5 @@
 body {
+  font-family: "Roboto", sans-serif;
   background: #0e83cd;
 }
 
@@ -32,7 +33,7 @@ body {
 }
 
 .btn:before {
-  font-family: "icomoon";
+  font-family: "Roboto", sans-serif;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -52,4 +53,23 @@ body {
 .btn-1a:active {
   color: #0e83cd;
   background: #fff;
+}
+
+p {
+  color: white;
+  font-style: italic;
+}
+
+h3 {
+  color: #0f2d70;
+  font-weight: 700px;
+  margin-bottom: 0px;
+}
+
+h1 {
+  color: white;
+}
+
+.names {
+  text-align: center;
 }

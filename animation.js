@@ -38,6 +38,7 @@ class Pattern {
           )
         );
 
+    this.updateState(0);
     this.draw();
   }
 
@@ -88,9 +89,21 @@ const ctx2 = document.querySelector("#canvasPattern2").getContext("2d");
 const ctx3 = document.querySelector("#canvasPattern3").getContext("2d");
 const ctx4 = document.querySelector("#canvasPattern4").getContext("2d");
 const ctx5 = document.querySelector("#canvasPattern5").getContext("2d");
+const ctx6 = document.querySelector("#canvasPattern6").getContext("2d");
+const ctx7 = document.querySelector("#canvasPattern7").getContext("2d");
+const ctx8 = document.querySelector("#canvasPattern8").getContext("2d");
 
-let pattern1 = new Pattern(
-  ctx1,
+let pattern1 = new Pattern(ctx1, [[]], { color: "#FFF" });
+let pattern2 = new Pattern(
+  ctx2,
+  [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]],
+  { color: "#FFF" }
+);
+let pattern3 = new Pattern(ctx3, [[0, 1, 2, 3, 4, 7, 8, 11, 12, 13, 14, 15]], {
+  color: "#FFF",
+});
+let pattern4 = new Pattern(
+  ctx4,
   [
     [0],
     [1],
@@ -111,8 +124,8 @@ let pattern1 = new Pattern(
   ],
   { color: "#FFF", sleepTime: 100 }
 );
-let pattern2 = new Pattern(
-  ctx2,
+let pattern5 = new Pattern(
+  ctx5,
   [
     [0, 1, 2, 3],
     [4, 5, 6, 7],
@@ -125,8 +138,8 @@ let pattern2 = new Pattern(
   ],
   { color: "#FFF", sleepTime: 100 }
 );
-let pattern3 = new Pattern(
-  ctx3,
+let pattern6 = new Pattern(
+  ctx6,
   [
     [3, 6, 9, 12],
     [7, 10, 13, 8],
@@ -137,8 +150,8 @@ let pattern3 = new Pattern(
   ],
   { color: "#FFF", sleepTime: 100 }
 );
-let pattern4 = new Pattern(
-  ctx4,
+let pattern7 = new Pattern(
+  ctx7,
   [
     [0, 4, 8, 12],
     [1, 5, 9, 13],
@@ -147,8 +160,8 @@ let pattern4 = new Pattern(
   ],
   { color: "#FFF", sleepTime: 100 }
 );
-let pattern5 = new Pattern(
-  ctx5,
+let pattern8 = new Pattern(
+  ctx8,
   [
     [0],
     [1],
@@ -179,29 +192,26 @@ let pattern5 = new Pattern(
 
 document.querySelector("#pattern1").addEventListener("mouseenter", () => {
   pattern1.color = "#0e83cd";
-  pattern1.setRunning(true);
+  pattern1.draw();
 });
 document.querySelector("#pattern1").addEventListener("mouseleave", () => {
   pattern1.color = "#fff";
-  pattern1.setRunning(false);
   pattern1.draw();
 });
 document.querySelector("#pattern2").addEventListener("mouseenter", () => {
   pattern2.color = "#0e83cd";
-  pattern2.setRunning(true);
+  pattern2.draw();
 });
 document.querySelector("#pattern2").addEventListener("mouseleave", () => {
   pattern2.color = "#fff";
-  pattern2.setRunning(false);
   pattern2.draw();
 });
 document.querySelector("#pattern3").addEventListener("mouseenter", () => {
   pattern3.color = "#0e83cd";
-  pattern3.setRunning(true);
+  pattern3.draw();
 });
 document.querySelector("#pattern3").addEventListener("mouseleave", () => {
   pattern3.color = "#fff";
-  pattern3.setRunning(false);
   pattern3.draw();
 });
 document.querySelector("#pattern4").addEventListener("mouseenter", () => {
@@ -221,4 +231,31 @@ document.querySelector("#pattern5").addEventListener("mouseleave", () => {
   pattern5.color = "#fff";
   pattern5.setRunning(false);
   pattern5.draw();
+});
+document.querySelector("#pattern6").addEventListener("mouseenter", () => {
+  pattern6.color = "#0e83cd";
+  pattern6.setRunning(true);
+});
+document.querySelector("#pattern6").addEventListener("mouseleave", () => {
+  pattern6.color = "#fff";
+  pattern6.setRunning(false);
+  pattern6.draw();
+});
+document.querySelector("#pattern7").addEventListener("mouseenter", () => {
+  pattern7.color = "#0e83cd";
+  pattern7.setRunning(true);
+});
+document.querySelector("#pattern7").addEventListener("mouseleave", () => {
+  pattern7.color = "#fff";
+  pattern7.setRunning(false);
+  pattern7.draw();
+});
+document.querySelector("#pattern8").addEventListener("mouseenter", () => {
+  pattern8.color = "#0e83cd";
+  pattern8.setRunning(true);
+});
+document.querySelector("#pattern8").addEventListener("mouseleave", () => {
+  pattern8.color = "#fff";
+  pattern8.setRunning(false);
+  pattern8.draw();
 });
